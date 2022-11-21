@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32516.85
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRS.Api", "CQRS.Api\CQRS.Api.csproj", "{BFF95EB9-3D1E-4017-A5E6-32D313C85594}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFF95EB9-3D1E-4017-A5E6-32D313C85594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFF95EB9-3D1E-4017-A5E6-32D313C85594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFF95EB9-3D1E-4017-A5E6-32D313C85594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFF95EB9-3D1E-4017-A5E6-32D313C85594}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {628576A7-912D-494B-B881-B3F0A0B4B76C}
+	EndGlobalSection
+EndGlobal
