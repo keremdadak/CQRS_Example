@@ -1,11 +1,12 @@
 ﻿using CQRS.Api.Queries.Request;
 using CQRS.Api.Queries.Response;
+using MediatR;
 
 namespace CQRS.Api.Handlers.QueryHandlers
 {
-    public class GetAllCustomerQueryHandler
+    public class GetAllCustomerQueryHandler : IRequestHandler<GetAllCustomerQueryRequest,List<GetAllCustomerQueryResponse>>
     {
-        public List<GetAllCustomerQueryResponse> GetAllCustomer(GetAllCustomerQueryRequest getAllCustomerQueryRequest)
+        public async Task<List<GetAllCustomerQueryResponse>> Handle(GetAllCustomerQueryRequest request,CancellationToken cancellationToken)
         {
             return AppDbContext.CustomerList.Select(customer => new GetAllCustomerQueryResponse
             {

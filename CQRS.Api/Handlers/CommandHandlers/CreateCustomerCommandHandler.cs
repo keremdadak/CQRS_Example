@@ -1,20 +1,21 @@
 ﻿using CQRS.Api.Commands.Request;
 using CQRS.Api.Commands.Response;
+using MediatR;
 
 namespace CQRS.Api.Handlers.CommandHandlers
 {
-    public class CreateCustomerCommandHandler
+    public class CreateCustomerCommandHandler:IRequestHandler<CreateCustomerCommandRequest,CreateCustomerCommandResponse>
     {
-        public CreateCustomerCommandResponse CreateProduct(CreateCustomerCommandRequest createCustomerCommandRequest)
+        public async Task<CreateCustomerCommandResponse> Handle(CreateCustomerCommandRequest request,CancellationToken cancellationToken)
         {
             var id = Guid.NewGuid();
             AppDbContext.CustomerList.Add(new()
             {
                 Id=id,
-                Name=createCustomerCommandRequest.Name,
-                Gender=createCustomerCommandRequest.Gender,
-                PhoneNumber=createCustomerCommandRequest.PhoneNumber,
-                City=createCustomerCommandRequest.City,
+                Name= request.Name,
+                Gender= request.Gender,
+                PhoneNumber= request.PhoneNumber,
+                City= request.City,
                 CreatedDate=DateTime.Now
             });
             return new CreateCustomerCommandResponse

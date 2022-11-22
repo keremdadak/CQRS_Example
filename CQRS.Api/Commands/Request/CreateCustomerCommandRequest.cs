@@ -1,6 +1,9 @@
-﻿namespace CQRS.Api.Commands.Request
+﻿using CQRS.Api.Commands.Response;
+using MediatR;
+
+namespace CQRS.Api.Commands.Request
 {
-    public class CreateCustomerCommandRequest
+    public class CreateCustomerCommandRequest: IRequest<CreateCustomerCommandResponse>
     {
         public string Name { get; set; }
         public string Gender { get; set; }

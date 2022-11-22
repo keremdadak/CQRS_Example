@@ -1,13 +1,14 @@
 ﻿using CQRS.Api.Queries.Request;
 using CQRS.Api.Queries.Response;
+using MediatR;
 
 namespace CQRS.Api.Handlers.QueryHandlers
 {
-    public class GetByIdCustomerQueryHandler
+    public class GetByIdCustomerQueryHandler:IRequestHandler<GetByIdCustomerQueryRequest,GetByIdCustomerQueryResponse>
     {
-        public GetByIdCustomerQueryResponse GetByIdCustomer(GetByIdCustomerQueryRequest getByIdCustomerQueryRequest)
+        public async Task<GetByIdCustomerQueryResponse> Handle(GetByIdCustomerQueryRequest request,CancellationToken cancellationToken)
         {
-            var customer = AppDbContext.CustomerList.FirstOrDefault(c=>c.Id==getByIdCustomerQueryRequest.Id);
+            var customer = AppDbContext.CustomerList.FirstOrDefault(c=>c.Id== request.Id);
             return new GetByIdCustomerQueryResponse
             {
                 Id=customer.Id,

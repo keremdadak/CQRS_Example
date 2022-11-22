@@ -7,12 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="11.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Handlers\QueryHandlers\" />
-    <Folder Include="Handlers\CommandHandlers\" />
   </ItemGroup>
 
 </Project>
