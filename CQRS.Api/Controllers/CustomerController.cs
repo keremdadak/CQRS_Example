@@ -1,11 +1,10 @@
 ﻿using CQRS.Api.Commands.Request;
 using CQRS.Api.Commands.Response;
-using CQRS.Api.Handlers.CommandHandlers;
-using CQRS.Api.Handlers.QueryHandlers;
 using CQRS.Api.Queries.Request;
 using CQRS.Api.Queries.Response;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MediatR;
 
 namespace CQRS.Api.Controllers
 {
@@ -13,40 +12,50 @@ namespace CQRS.Api.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        CreateCustomerCommandHandler _createCustomerCommandHandler;
-        DeleteCustomerCommandHandler _deleteCustomerCommandHandler;
-        GetAllCustomerQueryHandler _getAllCustomerQueryHandler;
-        GetByIdCustomerQueryHandler _getByIdCustomerQueryHandler;
+        #region MediatR olmasaydı böyle inject etmek zorunda kalacaktık.
+        //CreateCustomerCommandHandler _createCustomerCommandHandler;
+        //DeleteCustomerCommandHandler _deleteCustomerCommandHandler;
+        //GetAllCustomerQueryHandler _getAllCustomerQueryHandler;
+        //GetByIdCustomerQueryHandler _getByIdCustomerQueryHandler;
 
-        public CustomerController(CreateCustomerCommandHandler createCustomerCommandHandler, DeleteCustomerCommandHandler deleteCustomerCommandHandler, GetAllCustomerQueryHandler getAllCustomerQueryHandler, GetByIdCustomerQueryHandler getByIdCustomerQueryHandler)
+        //public CustomerController(CreateCustomerCommandHandler createCustomerCommandHandler, DeleteCustomerCommandHandler deleteCustomerCommandHandler, GetAllCustomerQueryHandler getAllCustomerQueryHandler, GetByIdCustomerQueryHandler getByIdCustomerQueryHandler)
+        //{
+        //    _createCustomerCommandHandler = createCustomerCommandHandler;
+        //    _deleteCustomerCommandHandler = deleteCustomerCommandHandler;
+        //    _getAllCustomerQueryHandler = getAllCustomerQueryHandler;
+        //    _getByIdCustomerQueryHandler = getByIdCustomerQueryHandler;
+        //}
+        #endregion
+
+        IMediator _mediator;
+
+        public CustomerController(IMediator mediator)
         {
-            _createCustomerCommandHandler = createCustomerCommandHandler;
-            _deleteCustomerCommandHandler = deleteCustomerCommandHandler;
-            _getAllCustomerQueryHandler = getAllCustomerQueryHandler;
-            _getByIdCustomerQueryHandler = getByIdCustomerQueryHandler;
+            _mediator = mediator;
         }
+
         [HttpGet]
-        public IActionResult Get([FromQuery] GetAllCustomerQueryRequest requestModel)
+        public async Task<IActionResult> Get([FromQuery] GetAllCustomerQueryRequest requestModel)
         {
-            List<GetAllCustomerQueryResponse> allCustomers = _getAllCustomerQueryHandler.GetAllCustomer(requestModel);
+            List<GetAllCustomerQueryResponse> allCustomers = await _mediator.Send(requestModel);
             return Ok(allCustomers);
         }
         [HttpGet("{id}")]
-        public IActionResult Get([FromQuery] GetByIdCustomerQueryRequest requestModel)
+        public async Task<IActionResult> Get([FromQuery] GetByIdCustomerQueryRequest requestModel)
         {
-            GetByIdCustomerQueryResponse customer = _getByIdCustomerQueryHandler.GetByIdCustomer(requestModel);
+            GetByIdCustomerQueryResponse customer = await _mediator.Send(requestModel);
             return Ok(customer);
         }
         [HttpPost]
-        public IActionResult Post([FromBody] CreateCustomerCommandRequest requestModel)
+        public async Task<IActionResult> Post([FromBody] CreateCustomerCommandRequest requestModel)
         {
-            CreateCustomerCommandResponse response = _createCustomerCommandHandler.CreateProduct(requestModel);
+            CreateCustomerCommandResponse response = await _mediator.Send(requestModel);
             return Ok(response);
         }
         [HttpDelete("{id}")]
-        public IActionResult Delete([FromQuery] DeleteCustomerCommandRequest requestModel)
+        public async Task<IActionResult> Delete([FromQuery] DeleteCustomerCommandRequest requestModel)
         {
-            DeleteCustomerCommandResponse response = _deleteCustomerCommandHandler.DeleteProduct(requestModel);
+            DeleteCustomerCommandResponse response = await _mediator.Send(requestModel);
             return Ok(response);
         }
     }

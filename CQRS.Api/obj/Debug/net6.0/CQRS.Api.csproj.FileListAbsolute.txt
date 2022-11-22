@@ -27,3 +27,4 @@ D:\CQRS\CQRS.Api\obj\Debug\net6.0\refint\CQRS.Api.dll
 D:\CQRS\CQRS.Api\obj\Debug\net6.0\CQRS.Api.pdb
 D:\CQRS\CQRS.Api\obj\Debug\net6.0\CQRS.Api.genruntimeconfig.cache
 D:\CQRS\CQRS.Api\obj\Debug\net6.0\ref\CQRS.Api.dll
+D:\CQRS\CQRS.Api\bin\Debug\net6.0\MediatR.Extensions.Microsoft.DependencyInjection.dll

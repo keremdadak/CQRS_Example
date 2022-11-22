@@ -4,7 +4,7 @@ using MediatR;
 
 namespace CQRS.Api.Handlers.QueryHandlers
 {
-    public class GetAllCustomerQueryHandler : IRequestHandler<GetAllCustomerQueryRequest,List<GetAllCustomerQueryResponse>>
+    public class GetAllCustomerQueryHandler : IRequestHandler<GetAllCustomerQueryRequest, List<GetAllCustomerQueryResponse>>
     {
         public async Task<List<GetAllCustomerQueryResponse>> Handle(GetAllCustomerQueryRequest request,CancellationToken cancellationToken)
         {
